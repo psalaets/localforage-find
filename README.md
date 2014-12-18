@@ -1,6 +1,6 @@
 # localforage-find
 
-Adds a O(n) find function to [localforage](http://mozilla.github.io/localForage/).
+Adds find function to [localforage](http://mozilla.github.io/localForage/).
 
 ## Usage
 

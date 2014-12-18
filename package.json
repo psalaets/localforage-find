@@ -1,7 +1,7 @@
 {
   "name": "localforage-find",
   "version": "1.0.0",
-  "description": "Adds a O(n) find function to localforage",
+  "description": "Adds find function to localforage",
   "main": "index.js",
   "scripts": {
     "test": "browserify test/test.js | testling"
