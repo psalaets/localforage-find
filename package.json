@@ -4,11 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "browserify test/test.js | testling"
   },
   "author": "",
   "license": "MIT",
   "peerDependencies": {
     "localforage": "^1.2.0"
+  },
+  "devDependencies": {
+    "browserify": "^7.0.2",
+    "phantomjs": "^1.9.12",
+    "tape": "^3.0.3",
+    "testling": "^1.7.1"
   }
 }
