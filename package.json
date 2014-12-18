@@ -1,12 +1,21 @@
 {
   "name": "localforage-find",
   "version": "1.0.0",
-  "description": "",
+  "description": "Adds a O(n) find function to localforage",
   "main": "index.js",
   "scripts": {
     "test": "browserify test/test.js | testling"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/psalaets/localforage-find.git"
+  },
+  "bugs": {
+    "url": "https://github.com/psalaets/localforage-find/issues"
+  },
+  "homepage": "https://github.com/psalaets/localforage-find",
+  "keywords": ["localforage", "find"],
+  "author": "Paul Salaets <psalaets@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
     "localforage": "^1.2.0"
