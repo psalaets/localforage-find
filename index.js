@@ -7,7 +7,10 @@ function addLocalforageFind(localforage) {
     return lf.keys().then(function(keys) {
       if (!keys.length) return [];
 
-      var results = [], pairsSeen = 0, expectedPairs = keys.length;
+      var results = [],
+          pairsSeen = 0,
+          expectedPairs = keys.length;
+
       return lf.iterate(function(value, key) {
         pairsSeen += 1;
 

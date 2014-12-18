@@ -6,9 +6,11 @@ var localforage = require('localforage');
 require('../')(localforage);
 
 // test data
-var score1 = {id: 'score1', score: 40},
-    score2 = {id: 'score2', score: 5},
-    score3 = {id: 'score3', score: 25};
+var scores = [
+  {id: 1, score: 40},
+  {id: 2, score: 5},
+  {id: 3, score: 25}
+];
 
 test('localforage.find()', function(t) {
   t.test('finds items by criteria', wrap(function(st) {
@@ -72,7 +74,7 @@ function wrap(testCallback) {
 function beforeEach(done) {
   var promise = localforage.clear();
 
-  [score1, score2, score3].forEach(function(score) {
+  scores.forEach(function(score) {
     promise = promise.then(function() {
       return localforage.setItem(score.id, score);
     });
