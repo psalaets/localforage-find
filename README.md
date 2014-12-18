@@ -15,12 +15,20 @@ localforage.find(function(key, value) {
 });
 ```
 
-Note: order of resultsArray is not guaranteed
+Order of resultsArray is not guaranteed.
 
 ## Install
 
 ```
 npm install localforage-find
+```
+
+## Run Tests
+
+You may need to delete ~/.config/browser-launcher/ first.
+
+```
+npm test
 ```
 
 ## License
