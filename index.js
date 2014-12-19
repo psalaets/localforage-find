@@ -1,7 +1,8 @@
 module.exports = addLocalforageFind;
 
 function addLocalforageFind(localforage) {
-  localforage.find = function find(criteria) {
+  localforage.find = function find(criteria, cb) {
+    cb = cb || noOp;
     var lf = this;
 
     return lf.keys().then(function(keys) {
@@ -22,6 +23,13 @@ function addLocalforageFind(localforage) {
           return results;
         }
       });
+    }).then(function(results) {
+      cb(null, results);
+      return results;
+    }, function(err) {
+      cb(err);
     });
   };
 }
+
+function noOp() {}

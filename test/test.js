@@ -13,7 +13,7 @@ var scores = [
 ];
 
 test('localforage.find()', function(t) {
-  t.test('finds items by criteria', wrap(function(st) {
+  t.test('finds items by criteria [promise]', wrap(function(st) {
     st.plan(4);
 
     var promise = localforage.find(function(key, value) {
@@ -21,7 +21,7 @@ test('localforage.find()', function(t) {
     });
 
     promise.then(function(results) {
-      // results are not ordered, just make sure they're both here
+      // results are not ordered, just make sure both scores are here
       st.equal(results.length, 2);
       st.ok(results[0].score > 10);
       st.ok(results[1].score > 10);
@@ -29,7 +29,25 @@ test('localforage.find()', function(t) {
     }).then(end(st), end(st));
   }));
 
-  t.test('result is empty array if nothing matches criteria', function(st) {
+  t.test('finds items by criteria [callback]', wrap(function(st) {
+    st.plan(5);
+
+    localforage.find(function(key, value) {
+      return value.score > 10;
+    }, function(err, results) {
+      st.equal(err, null);
+
+      // results are not ordered, just make sure both scores are here
+      st.equal(results.length, 2);
+      st.ok(results[0].score > 10);
+      st.ok(results[1].score > 10);
+      st.notEqual(results[0], results[1]);
+
+      st.end();
+    });
+  }));
+
+  t.test('result is empty array if nothing matches criteria [promise]', function(st) {
     st.plan(1);
 
     var promise = localforage.find(function(key, value) {
@@ -41,7 +59,20 @@ test('localforage.find()', function(t) {
     }).then(end(st), end(st));
   });
 
-  t.test('result is empty array when there is no data stored', function(st) {
+  t.test('result is empty array if nothing matches criteria [callback]', function(st) {
+    st.plan(2);
+
+    localforage.find(function(key, value) {
+      return false;
+    }, function(err, results) {
+      st.equal(err, null);
+      st.equal(results.length, 0);
+
+      st.end();
+    });
+  });
+
+  t.test('result is empty array when there is no data stored [promise]', function(st) {
     st.plan(1);
 
     var promise = localforage.clear().then(function() {
@@ -53,6 +84,19 @@ test('localforage.find()', function(t) {
     promise.then(function(results) {
       st.equal(results.length, 0);
     }).then(end(st), end(st));
+  });
+
+  t.test('result is empty array when there is no data stored [callback]', function(st) {
+    st.plan(2);
+
+    localforage.clear(function() {
+      localforage.find(function(key, value) {
+        return true;
+      }, function(err, results) {
+        st.equal(err, null);
+        st.equal(results.length, 0);
+      });
+    });
   });
 });
 
