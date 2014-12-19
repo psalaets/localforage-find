@@ -10,7 +10,7 @@ function addLocalforageFind(localforage) {
 
       var results = [],
           pairsSeen = 0,
-          expectedPairs = keys.length;
+          pairsExpected = keys.length;
 
       return lf.iterate(function(value, key) {
         pairsSeen += 1;
@@ -19,7 +19,7 @@ function addLocalforageFind(localforage) {
           results.push(value);
         }
 
-        if (pairsSeen == expectedPairs) {
+        if (pairsSeen == pairsExpected) {
           return results;
         }
       });
