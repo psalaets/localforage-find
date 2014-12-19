@@ -2,7 +2,7 @@ module.exports = addLocalforageFind;
 
 function addLocalforageFind(localforage) {
   localforage.find = function find(criteria, cb) {
-    cb = cb || noOp;
+    cb = cb || function() {};
     var lf = this;
 
     return lf.keys().then(function(keys) {
@@ -36,5 +36,3 @@ function addLocalforageFind(localforage) {
     });
   };
 }
-
-function noOp() {}
