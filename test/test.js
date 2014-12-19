@@ -26,8 +26,8 @@ test('localforage.find()', function(t) {
     promise.then(function(results) {
       // results are not ordered, just make sure both scores are here
       st.equal(results.length, 2);
-      st.ok(results[0].score > 10);
-      st.ok(results[1].score > 10);
+      st.ok(results[0].score > 10, 'score should be > 10');
+      st.ok(results[1].score > 10, 'other score should be > 10');
       st.notEqual(results[0], results[1]);
     }).then(end(st), end(st));
   }));
@@ -42,8 +42,8 @@ test('localforage.find()', function(t) {
 
       // results are not ordered, just make sure both scores are here
       st.equal(results.length, 2);
-      st.ok(results[0].score > 10);
-      st.ok(results[1].score > 10);
+      st.ok(results[0].score > 10, 'score should be > 10');
+      st.ok(results[1].score > 10, 'other score should be > 10');
       st.notEqual(results[0], results[1]);
 
       st.end();
@@ -113,7 +113,7 @@ test('localforage.find()', function(t) {
     promise.then(function(results) {
       st.fail(results);
     }, function(err) {
-      st.ok(err);
+      st.ok(err, 'error expected');
     }).then(end(st), end(st));
   }));
 
@@ -128,7 +128,7 @@ test('localforage.find()', function(t) {
     promise.then(function(results) {
       st.fail(results);
     }, function(err) {
-      st.ok(err);
+      st.ok(err, 'error expected');
     }).then(end(st), end(st));
   }));
 
@@ -140,7 +140,7 @@ test('localforage.find()', function(t) {
     fakeLocalforage.find(function(key, value) {
       return value.score > 10;
     }, function(err, results) {
-      st.ok(err);
+      st.ok(err, 'error expected');
       st.equal(results, null);
 
       st.end();
@@ -154,7 +154,7 @@ test('localforage.find()', function(t) {
     fakeLocalforage.find(function(key, value) {
       return value.score > 10;
     }, function(err, results) {
-      st.ok(err);
+      st.ok(err, 'error expected');
       st.equal(results, null);
 
       st.end();
