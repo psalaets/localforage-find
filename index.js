@@ -1,6 +1,6 @@
-module.exports = addLocalforageFind;
+module.exports = addFind;
 
-function addLocalforageFind(localforage) {
+function addFind(localforage) {
   localforage.find = function find(criteria, cb) {
     cb = cb || function() {};
     var lf = this;
