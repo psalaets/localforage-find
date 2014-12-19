@@ -1,9 +1,12 @@
 require('./array-bind-polyfill');
-
 var test = require('tape');
-var localforage = require('localforage');
 
-require('../')(localforage);
+var localforage = require('localforage');
+var fakeLocalforage = require('./fake-localforage');
+
+var addFind = require('../');
+addFind(localforage);
+addFind(fakeLocalforage);
 
 // test data
 var scores = [
@@ -98,6 +101,65 @@ test('localforage.find()', function(t) {
       });
     });
   });
+
+  t.test('returns rejected promise if localforage.keys() fails [promise]', wrap(function(st) {
+    st.plan(1);
+
+    fakeLocalforage.breakKeys = true;
+    var promise = fakeLocalforage.find(function(key, value) {
+      return value.score > 10;
+    });
+
+    promise.then(function(results) {
+      st.fail(results);
+    }, function(err) {
+      st.ok(err);
+    }).then(end(st), end(st));
+  }));
+
+  t.test('returns rejected promise if localforage.iterate() fails [promise]', wrap(function(st) {
+    st.plan(1);
+
+    fakeLocalforage.breakIterate = true;
+    var promise = fakeLocalforage.find(function(key, value) {
+      return value.score > 10;
+    });
+
+    promise.then(function(results) {
+      st.fail(results);
+    }, function(err) {
+      st.ok(err);
+    }).then(end(st), end(st));
+  }));
+
+
+  t.test('invokes callback with error if localforage.keys() fails [callback]', wrap(function(st) {
+    st.plan(2);
+
+    fakeLocalforage.breakKeys = true;
+    fakeLocalforage.find(function(key, value) {
+      return value.score > 10;
+    }, function(err, results) {
+      st.ok(err);
+      st.equal(results, null);
+
+      st.end();
+    });
+  }));
+
+  t.test('invokes callback with error if localforage.iterate() fails [callback]', wrap(function(st) {
+    st.plan(2);
+
+    fakeLocalforage.breakIterate = true;
+    fakeLocalforage.find(function(key, value) {
+      return value.score > 10;
+    }, function(err, results) {
+      st.ok(err);
+      st.equal(results, null);
+
+      st.end();
+    });
+  }));
 });
 
 // param: the t (or st) from tape
@@ -116,6 +178,10 @@ function wrap(testCallback) {
 }
 
 function beforeEach(done) {
+  // set up localforage mock
+  fakeLocalforage.resetFlags();
+
+  // clear real localforage then add some test data
   var promise = localforage.clear();
 
   scores.forEach(function(score) {

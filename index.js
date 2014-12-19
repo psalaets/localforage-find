@@ -25,9 +25,14 @@ function addLocalforageFind(localforage) {
       });
     }).then(function(results) {
       cb(null, results);
+
+      // return results here so resulting promised is fulfilled with it
       return results;
     }, function(err) {
-      cb(err);
+      cb(err, null);
+
+      // relaunch err so resulting promise is rejected with it
+      throw err;
     });
   };
 }

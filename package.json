@@ -14,7 +14,10 @@
     "url": "https://github.com/psalaets/localforage-find/issues"
   },
   "homepage": "https://github.com/psalaets/localforage-find",
-  "keywords": ["localforage", "find"],
+  "keywords": [
+    "localforage",
+    "find"
+  ],
   "author": "Paul Salaets <psalaets@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
@@ -22,6 +25,7 @@
   },
   "devDependencies": {
     "browserify": "^7.0.2",
+    "es6-promise": "^2.0.1",
     "phantomjs": "^1.9.12",
     "tape": "^3.0.3",
     "testling": "^1.7.1"
