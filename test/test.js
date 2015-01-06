@@ -138,7 +138,7 @@ test('localforage.find()', function(t) {
     });
 
     promise.then(function(results) {
-      st.equal(results.length, 0);
+      st.equal(results && results.length, 0);
     }).then(end(st), end(st));
   });
 
@@ -150,7 +150,7 @@ test('localforage.find()', function(t) {
         return true;
       }, function(err, results) {
         st.equal(err, null);
-        st.equal(results.length, 0);
+        st.equal(results && results.length, 0);
 
         st.end();
       });
