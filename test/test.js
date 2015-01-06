@@ -151,6 +151,8 @@ test('localforage.find()', function(t) {
       }, function(err, results) {
         st.equal(err, null);
         st.equal(results.length, 0);
+
+        st.end();
       });
     });
   });
