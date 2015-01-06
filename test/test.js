@@ -78,6 +78,31 @@ test('localforage.find()', function(t) {
     }, 1);
   }));
 
+  t.test('can ask for zero items [promise]', wrap(function(st) {
+    st.plan(1);
+
+    var promise = localforage.find(function(key, value) {
+      return value.score > 10;
+    }, 0);
+
+    promise.then(function(results) {
+      st.equal(results.length, 0);
+    }).then(end(st), end(st));
+  }));
+
+  t.test('can ask for zero items [callback]', wrap(function(st) {
+    st.plan(2);
+
+    localforage.find(function(key, value) {
+      return value.score > 10;
+    }, function(err, results) {
+      st.equal(err, null);
+      st.equal(results.length, 0);
+
+      st.end();
+    }, 0);
+  }));
+
   t.test('result is empty array if nothing matches criteria [promise]', function(st) {
     st.plan(1);
 

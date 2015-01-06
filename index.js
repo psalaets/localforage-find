@@ -21,6 +21,7 @@
       var lf = this;
       return lf.keys().then(function(keys) {
         if (!keys.length) return [];
+        if (!limit) return [];
 
         var results = [],
             pairsSeen = 0,
