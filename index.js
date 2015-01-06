@@ -20,7 +20,9 @@
 
       var lf = this;
       return lf.keys().then(function(keys) {
+        // no data stored
         if (!keys.length) return [];
+        // asked for no results
         if (!limit) return [];
 
         var results = [],
@@ -28,12 +30,11 @@
             pairsExpected = keys.length;
 
         return lf.iterate(function(value, key) {
-          pairsSeen += 1;
-
           if (criteria(key, value)) {
             results.push(value);
           }
 
+          pairsSeen += 1;
           if (pairsSeen == pairsExpected || results.length == limit) {
             return results;
           }
