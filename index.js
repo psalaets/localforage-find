@@ -7,10 +7,18 @@
   }
 
   function addFind(localforage) {
-    localforage.find = function find(criteria, callback) {
-      callback = callback || function() {};
-      var lf = this;
+    localforage.find = function find(criteria, callbackOrLimit, maybeLimit) {
+      var limit, callback;
 
+      if (typeof callbackOrLimit == 'function') { // callback use case
+        callback = callbackOrLimit;
+        limit = defaultLimit(maybeLimit);
+      } else { // promise use case
+        callback = function() {};
+        limit = defaultLimit(callbackOrLimit);
+      }
+
+      var lf = this;
       return lf.keys().then(function(keys) {
         if (!keys.length) return [];
 
@@ -25,7 +33,7 @@
             results.push(value);
           }
 
-          if (pairsSeen == pairsExpected) {
+          if (pairsSeen == pairsExpected || results.length == limit) {
             return results;
           }
         });
@@ -41,5 +49,13 @@
         throw err;
       });
     };
+  }
+
+  function defaultLimit(optionalLimit) {
+    if (optionalLimit || optionalLimit === 0) {
+      return optionalLimit;
+    } else {
+      return Number.MAX_VALUE;
+    }
   }
 })(this);
