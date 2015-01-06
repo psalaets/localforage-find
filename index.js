@@ -7,8 +7,8 @@
   }
 
   function addFind(localforage) {
-    localforage.find = function find(criteria, cb) {
-      cb = cb || function() {};
+    localforage.find = function find(criteria, callback) {
+      callback = callback || function() {};
       var lf = this;
 
       return lf.keys().then(function(keys) {
@@ -30,12 +30,12 @@
           }
         });
       }).then(function(results) {
-        cb(null, results);
+        callback(null, results);
 
         // return results here so resulting promised is fulfilled with it
         return results;
       }, function(err) {
-        cb(err, null);
+        callback(err, null);
 
         // relaunch err so resulting promise is rejected with it
         throw err;
