@@ -51,7 +51,7 @@ test('localforage.find()', function(t) {
   }));
 
   t.test('can limit number of items returned [promise]', wrap(function(st) {
-    st.plan(4);
+    st.plan(2);
 
     var promise = localforage.find(function(key, value) {
       return value.score > 10;
@@ -64,7 +64,7 @@ test('localforage.find()', function(t) {
   }));
 
   t.test('can limit number of items returned [callback]', wrap(function(st) {
-    st.plan(5);
+    st.plan(3);
 
     localforage.find(function(key, value) {
       return value.score > 10;
