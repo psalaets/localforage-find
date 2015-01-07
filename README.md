@@ -36,7 +36,7 @@ Returns Promise fulfilled with Array of results. Array ordering is not guarantee
 
 ### With promises
 
-```
+```javascript
 var limit = 2;
 
 localforage.find(function(key, value) {
@@ -49,7 +49,7 @@ localforage.find(function(key, value) {
 
 ### With callbacks
 
-```
+```javascript
 var limit = 2;
 
 localforage.find(function(key, value) {
