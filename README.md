@@ -30,11 +30,9 @@ require('localforage-find')(localforage);
 - limit - Optional max length of results, defaults to unlimited
 - callback - Optional function that takes (error, resultsArray)
 
-Returns Promise fulfilled with Array of results
+Returns Promise fulfilled with Array of results. Array ordering is not guaranteed.
 
 ## Examples
-
-Note: Order of resultsArray is not guaranteed.
 
 ### With promises
 
