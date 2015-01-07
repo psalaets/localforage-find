@@ -4,6 +4,8 @@ Adds find function to [localforage](http://mozilla.github.io/localForage/).
 
 ## Setup
 
+Works with localforage 1.2.0 or later.
+
 ### From npm
 
 ```
