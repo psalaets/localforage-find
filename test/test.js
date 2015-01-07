@@ -68,14 +68,14 @@ test('localforage.find()', function(t) {
 
     localforage.find(function(key, value) {
       return value.score > 10;
-    }, function(err, results) {
+    }, 1, function(err, results) {
       st.equal(err, null);
 
       st.equal(results.length, 1);
       st.ok(results[0].score > 10, 'score should be > 10');
 
       st.end();
-    }, 1);
+    });
   }));
 
   t.test('can ask for zero items [promise]', wrap(function(st) {
@@ -95,12 +95,12 @@ test('localforage.find()', function(t) {
 
     localforage.find(function(key, value) {
       return value.score > 10;
-    }, function(err, results) {
+    }, 0, function(err, results) {
       st.equal(err, null);
       st.equal(results.length, 0);
 
       st.end();
-    }, 0);
+    });
   }));
 
   t.test('result is empty array if nothing matches criteria [promise]', function(st) {

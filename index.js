@@ -2,20 +2,23 @@
   // commonjs environment
   if (typeof module == 'object' && module.exports) {
     module.exports = addFind;
-  } else { // plain old <script>
+  } else { // plain old <script> tag
     global.localforageFind = addFind;
   }
 
+  var UNLIMITED = -1;
+
   function addFind(localforage) {
-    localforage.find = function find(criteria, callbackOrLimit, maybeLimit) {
+    localforage.find = function find(criteria, callbackOrLimit, maybeCallback) {
       var limit, callback;
 
-      if (typeof callbackOrLimit == 'function') { // callback use case
-        callback = callbackOrLimit;
-        limit = defaultLimit(maybeLimit);
-      } else { // promise use case
-        callback = function() {};
-        limit = defaultLimit(callbackOrLimit);
+      // limit was specified
+      if (typeof callbackOrLimit == 'number') {
+        limit = callbackOrLimit;
+        callback = defaultCallback(maybeCallback);
+      } else { // no limit
+        limit = UNLIMITED;
+        callback = defaultCallback(callbackOrLimit);
       }
 
       var lf = this;
@@ -35,14 +38,18 @@
           }
 
           pairsSeen += 1;
-          if (pairsSeen == pairsExpected || results.length == limit) {
-            return results;
-          }
+
+          // Stop iterating and return results if we...
+
+          // have checked every key/value pair
+          if (pairsSeen == pairsExpected) return results;
+          // or have found enough results
+          if (limit != UNLIMITED && results.length == limit) return results;
         });
       }).then(function(results) {
         callback(null, results);
 
-        // return results here so resulting promised is fulfilled with it
+        // return results here so resulting promise is fulfilled with it
         return results;
       }, function(err) {
         callback(err, null);
@@ -53,11 +60,7 @@
     };
   }
 
-  function defaultLimit(optionalLimit) {
-    if (optionalLimit || optionalLimit === 0) {
-      return optionalLimit;
-    } else {
-      return Number.MAX_VALUE;
-    }
+  function defaultCallback(optionalCallback) {
+    return optionalCallback || function() {};
   }
 })(this);
