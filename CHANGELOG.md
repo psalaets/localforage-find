@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2015-01-06
+### Added
+
+- find() accepts optional limit parameter
+
 ## [1.2.0] - 2014-12-20
 ### Added
 
