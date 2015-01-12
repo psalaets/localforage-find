@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0] - 2015-01-12
+### Changed
+
+- In case of error, 2nd param to callback is undefined (was: null)
+
 ## [1.3.0] - 2015-01-06
 ### Added
 
