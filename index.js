@@ -15,14 +15,14 @@
       // limit was specified
       if (typeof callbackOrLimit == 'number') {
         limit = callbackOrLimit;
-        callback = defaultCallback(maybeCallback);
+        callback = maybeCallback;
       } else { // no limit
         limit = UNLIMITED;
-        callback = defaultCallback(callbackOrLimit);
+        callback = callbackOrLimit;
       }
 
       var lf = this;
-      return lf.keys().then(function(keys) {
+      var promise = lf.keys().then(function(keys) {
         // no data stored
         if (!keys.length) return [];
         // asked for no results
@@ -46,21 +46,28 @@
           // or have found enough results
           if (limit != UNLIMITED && results.length == limit) return results;
         });
-      }).then(function(results) {
-        callback(null, results);
-
-        // return results here so resulting promise is fulfilled with it
-        return results;
-      }, function(err) {
-        callback(err, null);
-
-        // relaunch err so resulting promise is rejected with it
-        throw err;
       });
+
+      return chainCallback(promise, callback);
     };
   }
 
-  function defaultCallback(optionalCallback) {
-    return optionalCallback || function() {};
+  /**
+  * Hook callback into a promise.
+  *
+  * @param promise Promise to chain onto
+  * @param callback Optional error-first callback to invoke with promise
+  * @return a promise
+  */
+  function chainCallback(promise, callback) {
+    if (callback) {
+      return promise.then(function fulfilled(result) {
+        callback(null, result);
+      }, function rejected(reason) {
+        callback(reason);
+      });
+    } else {
+      return promise;
+    }
   }
 })(this);
