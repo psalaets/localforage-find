@@ -187,30 +187,27 @@ test('localforage.find()', function(t) {
     }).then(end(st), end(st));
   }));
 
-
   t.test('invokes callback with error if localforage.keys() fails [callback]', wrap(function(st) {
-    st.plan(2);
+    st.plan(1);
 
     fakeLocalforage.breakKeys = true;
     fakeLocalforage.find(function(key, value) {
       return value.score > 10;
     }, function(err, results) {
       st.ok(err, 'error expected');
-      st.equal(results, null);
 
       st.end();
     });
   }));
 
   t.test('invokes callback with error if localforage.iterate() fails [callback]', wrap(function(st) {
-    st.plan(2);
+    st.plan(1);
 
     fakeLocalforage.breakIterate = true;
     fakeLocalforage.find(function(key, value) {
       return value.score > 10;
     }, function(err, results) {
       st.ok(err, 'error expected');
-      st.equal(results, null);
 
       st.end();
     });
