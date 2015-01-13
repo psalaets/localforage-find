@@ -8,16 +8,18 @@ Works with localforage 1.2.0 or later.
 
 ### From npm
 
-```
+```javascript
 var localforage = require('localforage');
 require('localforage-find')(localforage);
 ```
 
 ### From bower
 
-    <script>
-      localforageFind(localforage);
-    </script>
+```html
+<script>
+  localforageFind(localforage);
+</script>
+```
 
 ## API
 
