@@ -2,18 +2,26 @@
 
 Adds find function to [localforage](http://mozilla.github.io/localForage/).
 
-## Setup
+## Install and Setup
 
 Works with localforage 1.2.0 or later.
 
-### From npm
+### npm
+
+```
+npm install localforage-find
+```
 
 ```javascript
 var localforage = require('localforage');
 require('localforage-find')(localforage);
 ```
 
-### From bower
+### bower
+
+```
+bower install localforage-find
+```
 
 ```html
 <script>
@@ -60,18 +68,6 @@ localforage.find(function(key, value) {
   // everything in resultsArray has score > 20
   // resultsArray.length is at most 2
 });
-```
-
-## Install
-
-```
-npm install localforage-find
-```
-
-or
-
-```
-bower install localforage-find
 ```
 
 ## Run Tests
