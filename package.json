@@ -1,6 +1,6 @@
 {
   "name": "localforage-find",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Adds find function to localforage",
   "main": "index.js",
   "scripts": {

@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.1] - 2017-10-25
+### Changed
+
+- `find()` is now added to localforage's prototype, not just default instance
+
 ## [2.0.0] - 2015-01-12
 ### Changed
 
