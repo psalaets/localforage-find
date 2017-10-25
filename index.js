@@ -9,7 +9,8 @@
   var UNLIMITED = -1;
 
   function addFind(localforage) {
-    localforage.find = function find(criteria, callbackOrLimit, maybeCallback) {
+    var prototype = Object.getPrototypeOf(localforage);
+    prototype.find = function find(criteria, callbackOrLimit, maybeCallback) {
       var limit, callback;
 
       // limit was specified

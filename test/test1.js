@@ -1,7 +1,9 @@
 const assert = require('assert');
 
 var localforage = require('localforage');
-var fakeLocalforage = require('./fake-localforage');
+var FakeLocalForage = require('./fake-localforage');
+
+const fakeLocalforage = new FakeLocalForage();
 
 var addFind = require('../');
 addFind(localforage);
@@ -16,7 +18,7 @@ var scores = [
 
 beforeEach(() => {
   // set up localforage mock
-  fakeLocalforage.resetFlags();
+  fakeLocalforage.resetState();
 
   // clear real localforage then add some test data
   let promise = localforage.clear();
@@ -197,6 +199,34 @@ describe('find()', () => {
         assert.ok(err, 'error expected');
         done();
       });
+    });
+  });
+
+  describe('on localforage store instances', () => {
+    it('exists', () => {
+      const store = localforage.createInstance({
+        name: 'test'
+      });
+
+      assert.equal(typeof store.find, 'function');
+    });
+
+    it('works (smoke test)', () => {
+      const store = localforage.createInstance({
+        name: 'test'
+      });
+
+      return store.clear()
+        .then(() => store.setItem('a', 'A'))
+        .then(() => {
+          return store.find(function(key, value) {
+            return key === 'a';
+          });
+        })
+        .then(function(results) {
+          assert.equal(results.length, 1);
+          assert.equal(results[0], 'A');
+        });
     });
   });
 });
