@@ -1,6 +1,6 @@
 # localforage-find
 
-Adds find function to [localforage](http://mozilla.github.io/localForage/).
+Adds find function to [localforage](https://github.com/localForage/localForage).
 
 ## Install and Setup
 
