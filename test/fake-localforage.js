@@ -1,7 +1,4 @@
 // broken localforage stand-in that has the couple methods we need
-
-var Promise = require('es6-promise').Promise;
-
 var keys = ['a', 'b', 'c'];
 var values = ['A', 'B', 'C'];
 
