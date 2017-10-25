@@ -6,22 +6,27 @@ Adds find function to [localforage](http://mozilla.github.io/localForage/).
 
 Works with localforage 1.2.0 or later.
 
-### npm
-
 ```
 npm install localforage-find
 ```
 
+### commonjs
+
 ```javascript
-var localforage = require('localforage');
+const localforage = require('localforage');
 require('localforage-find')(localforage);
 ```
 
-### bower
+### es6
 
 ```
-bower install localforage-find
+import localforage from 'localforage';
+import addFind from 'localforage-find';
+
+addFind(localforage);
 ```
+
+### globals
 
 ```html
 <script>
@@ -69,16 +74,6 @@ localforage.find(function(key, value) {
   // resultsArray.length is at most 2
 });
 ```
-
-## Run Tests
-
-You may need to delete ~/.config/browser-launcher/ first.
-
-```
-npm test
-```
-
-Also open test/scriptTag.html in a browser.
 
 ## License
 
