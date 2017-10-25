@@ -12,14 +12,14 @@ npm install localforage-find
 
 ### commonjs
 
-```javascript
+```js
 const localforage = require('localforage');
 require('localforage-find')(localforage);
 ```
 
 ### es6
 
-```
+```js
 import localforage from 'localforage';
 import addFind from 'localforage-find';
 
