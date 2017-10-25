@@ -49,30 +49,28 @@ Returns Promise fulfilled with Array of results. Array ordering is not guarantee
 
 ## Examples
 
-### With promises
+### With Promises
 
-```javascript
-var limit = 2;
+```js
+const limit = 2;
 
-localforage.find(function(key, value) {
-  return value.score > 20;
-}, limit).then(function(resultsArray) {
-  // everything in resultsArray has score > 20
-  // resultsArray.length is at most 2
-});
+localforage.find((key, value) => value.score > 20, limit)
+  .then(resultsArray => {
+    // everything in resultsArray has score > 20
+    // resultsArray.length is at most 2
+  });
 ```
 
 ### With callbacks
 
-```javascript
-var limit = 2;
+```js
+const limit = 2;
 
-localforage.find(function(key, value) {
-  return value.score > 20;
-}, limit, function(err, resultsArray) {
-  // everything in resultsArray has score > 20
-  // resultsArray.length is at most 2
-});
+localforage.find((key, value) => value.score > 20, limit,
+  (err, resultsArray) => {
+    // everything in resultsArray has score > 20
+    // resultsArray.length is at most 2
+  });
 ```
 
 ## License
